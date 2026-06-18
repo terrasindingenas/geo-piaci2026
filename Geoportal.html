@@ -19,7 +19,6 @@
   <script src="./Dados/Mineracao_Amazonas.js"></script>
   <script src="./Dados/Mask_blanco.js"></script>
   <script src="./Dados/Desmatamento_2025.js"></script>
-  <script src="./Dados/Desmatamento_2024.js"></script>
   <script src="./Dados/Desmatamento_2023.js"></script>
   <script src="./Dados/Desmatamento_2022.js"></script>
   <script src="./Dados/Desmatamento_2021.js"></script>
@@ -28,7 +27,6 @@
   <script src="./Dados/Desmatamento_2018.js"></script>
   <script src="./Dados/Desmatamento_2017.js"></script>
   <script src="./Dados/Desmatamento_2016.js"></script>
-  <script src="./Dados/Desmatamento_2015.js"></script>
   <script src="./Dados/Piaci_confirmado.js"></script>
   <script src="./Dados/Piaci_noconfirmado.js"></script>
   <script src="./Dados/Garimpo.js"></script>
@@ -577,19 +575,6 @@ const Rutas_MineracaoIlegal_Layer = L.geoJSON(Rutas_Mineracao, {
       }
     });
 
-    const Desmatamento_2024_Layer = L.geoJSON(Desmatamento_2024, {
-      pane: "paneamazonas",
-      style: {
-        color: "#FFF1A8",
-        weight: 0.4,
-        fillColor: "#FFF1A8",
-        fillOpacity: 0
-      },
-      interactive: true,
-      onEachFeature: function (feature, layer) {
-        layer.bindPopup(`<b>Desmatamento 2024</b>`);
-      }
-    });
 
     const Desmatamento_2023_Layer = L.geoJSON(Desmatamento_2023, {
       pane: "paneamazonas",
@@ -703,19 +688,6 @@ const Rutas_MineracaoIlegal_Layer = L.geoJSON(Rutas_Mineracao, {
       }
     });
 
-    const Desmatamento_2015_Layer = L.geoJSON(Desmatamento_2015, {
-      pane: "paneamazonas",
-      style: {
-        color: "#800026",
-        weight: 0.4,
-        fillColor: "#800026",
-        fillOpacity: 0
-      },
-      interactive: true,
-      onEachFeature: function (feature, layer) {
-        layer.bindPopup(`<b>Desmatamento 2015</b>`);
-      }
-    });
 
     const Estados_Brasil_Layer = L.geoJSON(Estados_Brasil, {
       pane: "paneamazonas",
@@ -762,7 +734,6 @@ const controlesCamadas = [
   ["chk-mineracao", Rutas_MineracaoIlegal_Layer],
 
   ["chk-desm2025", Desmatamento_2025_Layer],
-  ["chk-desm2024", Desmatamento_2024_Layer],
   ["chk-desm2023", Desmatamento_2023_Layer],
   ["chk-desm2022", Desmatamento_2022_Layer],
   ["chk-desm2021", Desmatamento_2021_Layer],
@@ -771,7 +742,6 @@ const controlesCamadas = [
   ["chk-desm2018", Desmatamento_2018_Layer],
   ["chk-desm2017", Desmatamento_2017_Layer],
   ["chk-desm2016", Desmatamento_2016_Layer],
-  ["chk-desm2015", Desmatamento_2015_Layer]
 ];
 
 controlesCamadas.forEach(([idCheckbox, camada]) => {

@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="icon" href="imagens/logo.png" />
+  <title>Geovisor PIACI ACT - APIAM</title>
+
+  <link rel="stylesheet" href="Geoportal.css" />
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin></script>
+
+  <script src="./Dados/Estado_Amazonas.js"></script>
+  <script src="./Dados/TI_Recente_Contato_Amazonas2.js"></script>
+  <script src="./Dados/TI_Recente_Contato_Isolados_Amazonas.js"></script>
+  <script src="./Dados/Restricao_de_uso.js"></script>
+  <script src="./Dados/Outras_TI_Amazonas.js"></script>
+  <script src="./Dados/Mineracao_Amazonas.js"></script>
+  <script src="./Dados/Mask_blanco.js"></script>
+  <script src="./Dados/Desmatamento_2025.js"></script>
+  <script src="./Dados/Desmatamento_2024.js"></script>
+  <script src="./Dados/Desmatamento_2023.js"></script>
+  <script src="./Dados/Desmatamento_2022.js"></script>
+  <script src="./Dados/Desmatamento_2021.js"></script>
+  <script src="./Dados/Desmatamento_2020.js"></script>
+  <script src="./Dados/Desmatamento_2019.js"></script>
+  <script src="./Dados/Desmatamento_2018.js"></script>
+  <script src="./Dados/Desmatamento_2017.js"></script>
+  <script src="./Dados/Desmatamento_2016.js"></script>
+  <script src="./Dados/Desmatamento_2015.js"></script>
+  <script src="./Dados/Piaci_confirmado.js"></script>
+  <script src="./Dados/Piaci_noconfirmado.js"></script>
+  <script src="./Dados/Garimpo.js"></script>
+  <script src="./Dados/Rutas_Narcotrafico_Garimpo.js"></script>
+  <script src="./Dados/Rutas_Narcotrafico.js"></script>
+  <script src="./Dados/Rutas_Mineracao.js"></script>
+  <script src="./Dados/Ponto_Brasil2.js"></script>
+   <script src="./Dados/Ponto_Amazonas.js"></script>
+   <script src="./Dados/Ponto_Estados2.js"></script>
+   <script src="./Dados/Estados_Brasil.js"></script>
+   <script src="./Dados/Paisesgeo.js"></script>
+
+</head>
+
+<body>
+  <aside class="sidebar">
+    <h2>Geovisor dos Povos Indígenas Isolados e de Recente Contato no Estado do Amazonas</h2>
+
+    <div class="sidebar-legend">
+      <h3>TI com Povos Indígenas de Recente Contato</h3>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-ancestral">
+          <input type="checkbox" id="chk-ancestral">
+          <span class="legend-box ancestral"></span>
+          <span class="layer-text">Médio Rio Negro I, Rio Apaporis, Paraná do Boá-Boá, Uneiuxi, Kulina do Médio Juruá, Cacau do Tarauacá e Ipixuna</span>
+        </label>
+      </div>
+
+      <h3 class="titulo-recente">TI com Povos Indígenas Isolados e de Recente Contato</h3>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-isoladoserecentes">
+          <input type="checkbox" id="chk-isoladoserecentes">
+          <span class="legend-box isoladoserecentes"></span>
+          <span class="layer-text">Alto Rio Negro, Yanomami, Waimiri-Atroari, Piranha e Vale do Javari</span>
+        </label>
+      </div>
+
+      <h3 class="titulo-restricao">TI com Restrição de Uso para proteção de Povos Indígenas Isolados</h3>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-restricao">
+          <input type="checkbox" id="chk-restricao">
+          <span class="legend-box restricao"></span>
+          <span class="layer-text">Jacareúba/Katawixi</span>
+        </label>
+      </div>
+
+      <h3>TI Brasil</h3>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-terrasbrasil">
+          <input type="checkbox" id="chk-terrasbrasil">
+          <span class="legend-box terrasbrasil"></span>
+          <span class="layer-text">Terras Indígenas do Brasil</span>
+        </label>
+      </div>
+
+      <h3>Povos Indígenas Isolados - GTI PIACI</h3>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-piaci">
+          <input type="checkbox" id="chk-piaci">
+          <span class="legend-box piaci"></span>
+          <span class="layer-text">Presença confirmada de Povos Indígenas Isolados</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-piaci-nao-confirmada">
+          <input type="checkbox" id="chk-piaci-nao-confirmada">
+          <span class="legend-box piaci-nao-confirmada"></span>
+          <span class="layer-text">Presença não confirmada de Povos Indígenas Isolados</span>
+        </label>
+      </div>
+
+      <h3 class="titulo-restricao">Ameaças e Problemas Territoriais</h3>
+
+
+<div class="layer-item">
+  <label class="layer-label" for="chk-garimpo">
+    <input type="checkbox" id="chk-garimpo">
+    <span class="legend-box garimpo"></span>
+    <span class="layer-text">Pontos de Garimpo (MapBiomas Brasil)</span>
+  </label>
+</div>
+
+
+<div class="layer-item">
+  <label class="layer-label" for="chk-narcogarimpo">
+    <input type="checkbox" id="chk-narcogarimpo">
+    <span class="legend-box narcogarimpo"></span>
+    <span class="layer-text">Rotas Fluviais de Narcotráfico e Mineração Ilegal Rios: Caquetá, Japurá, Içá e Putumayo</span>
+  </label>
+</div>
+
+<div class="layer-item">
+  <label class="layer-label" for="chk-narco">
+    <input type="checkbox" id="chk-narco">
+    <span class="legend-box narco"></span>
+    <span class="layer-text">Rotas Fluviais de Narcotráfico Rios: Solimões e Rio Negro</span>
+  </label>
+</div>
+
+
+<div class="layer-item">
+  <label class="layer-label" for="chk-mineracao">
+    <input type="checkbox" id="chk-mineracao">
+    <span class="legend-box mineracao"></span>
+    <span class="layer-text">Rotas Fluviais de Mineração Ilegal Rios: Apaporis, Cotuhé, Pure, Puruê e Juami</span>
+  </label>
+</div>
+
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2025">
+          <input type="checkbox" id="chk-desm2025">
+          <span class="legend-box desm2025"></span>
+          <span class="layer-text">Desmatamento 2025</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2024">
+          <input type="checkbox" id="chk-desm2024">
+          <span class="legend-box desm2024"></span>
+          <span class="layer-text">Desmatamento 2024</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2023">
+          <input type="checkbox" id="chk-desm2023">
+          <span class="legend-box desm2023"></span>
+          <span class="layer-text">Desmatamento 2023</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2022">
+          <input type="checkbox" id="chk-desm2022">
+          <span class="legend-box desm2022"></span>
+          <span class="layer-text">Desmatamento 2022</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2021">
+          <input type="checkbox" id="chk-desm2021">
+          <span class="legend-box desm2021"></span>
+          <span class="layer-text">Desmatamento 2021</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2020">
+          <input type="checkbox" id="chk-desm2020">
+          <span class="legend-box desm2020"></span>
+          <span class="layer-text">Desmatamento 2020</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2019">
+          <input type="checkbox" id="chk-desm2019">
+          <span class="legend-box desm2019"></span>
+          <span class="layer-text">Desmatamento 2019</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2018">
+          <input type="checkbox" id="chk-desm2018">
+          <span class="legend-box desm2018"></span>
+          <span class="layer-text">Desmatamento 2018</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2017">
+          <input type="checkbox" id="chk-desm2017">
+          <span class="legend-box desm2017"></span>
+          <span class="layer-text">Desmatamento 2017</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2016">
+          <input type="checkbox" id="chk-desm2016">
+          <span class="legend-box desm2016"></span>
+          <span class="layer-text">Desmatamento 2016</span>
+        </label>
+      </div>
+
+      <div class="layer-item">
+        <label class="layer-label" for="chk-desm2015">
+          <input type="checkbox" id="chk-desm2015">
+          <span class="legend-box desm2015"></span>
+          <span class="layer-text">Desmatamento 2015</span>
+        </label>
+      </div>
+    </div>
+
+
+<hr class="linha-logos">
+
+<div class="logos">
+  <img src="imagens/logo2.png" alt="Logo 2">
+  <img src="imagens/apiam.jpg" alt="APIAM">
+</div>
+  </aside>
+
+  <main id="mapa_geportal" aria-label="Mapa"></main>
+
+  <script>
+    const bounds = [
+      [-12, -78],
+      [5, -54]
+    ];
+
+    const map = L.map("mapa_geportal", {
+      zoomSnap: 0.01,
+      zoomDelta: 0.01,
+      minZoom: 6,
+      maxBounds: bounds,
+      maxBoundsViscosity: 1.0
+    }).setView(
+      [-3.7418899224445803, -66.79547027494057],
+      6.22
+    );
+
+    L.tileLayer(
+      "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+      {
+        minZoom: 6,
+        maxZoom: 19,
+        attribution:
+          "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community"
+      }
+    ).addTo(map);
+
+    function v(val) {
+      if (
+        val === null ||
+        val === undefined ||
+        (typeof val === "string" && val.trim() === "")
+      ) {
+        return "-";
+      }
+      return val;
+    }
+
+map.createPane("paneamazonas");
+map.getPane("paneamazonas").style.zIndex = 600;
+
+map.createPane("paneLimiteAmazonas");
+map.getPane("paneLimiteAmazonas").style.zIndex = 650;
+
+    const AmazonasLayer = L.geoJSON(Estado_Amazonas, {
+      pane: "paneLimiteAmazonas",
+      style: function () {
+        return {
+          color: "#000000",
+          weight: 3,
+          fillOpacity: 0
+        };
+      },
+      interactive: false
+    }).addTo(map);
+
+
+const PontoBrasilLayer = L.geoJSON(Ponto_Brasil2, {
+  pane: "paneLimiteAmazonas",
+
+  pointToLayer: function (feature, latlng) {
+    const p = feature.properties || {};
+
+    return L.marker(latlng, {
+      icon: L.divIcon({
+        className: "label-brasil",
+        html: `${v(p.Name)}`,
+        iconSize: null
+      })
+    });
+  },
+
+  interactive: false,}).addTo(map);
+
+
+
+const PontoAmazonasLayer = L.geoJSON(Ponto_Amazonas, {
+  pane: "paneLimiteAmazonas",
+
+  pointToLayer: function (feature, latlng) {
+    const p = feature.properties || {};
+
+    return L.marker(latlng, {
+      icon: L.divIcon({
+        className: "label-PontoAmazonas",
+        html: `${v(p.Name)}`,
+        iconSize: null
+      })
+    });
+  },
+
+  interactive: false,}).addTo(map);
+
+
+
+  const PontoEstadosLayer = L.geoJSON(Ponto_Estados2, {
+  pane: "paneLimiteAmazonas",
+
+  pointToLayer: function (feature, latlng) {
+    const p = feature.properties || {};
+
+    return L.marker(latlng, {
+      icon: L.divIcon({
+        className: "label-PontoEstados",
+        html: `${v(p.Name)}`,
+        iconSize: null
+      })
+    });
+  },
+
+  interactive: false,}).addTo(map);
+
+
+    const TI_Recente_Contato_Amazonas_Layer = L.geoJSON(TI_Recente_Contato_Amazonas2, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#FFFF73",
+          weight: 1,
+          fillColor: "#FFFF73",
+          fillOpacity: 0.4
+        };
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        const p = feature.properties || {};
+
+        layer.bindPopup(`
+          <div style="text-align:center; font-size:14px; font-weight:bold; color:#000; margin-bottom:10px;">
+            Terra Indígena ${v(p.terrai_nom)}<br>
+          </div>
+
+          <b>Terras Indígenas com Povos Indígenas de Recente Contato</b><br><br>
+          <b>Etnias:</b> ${v(p.etnia_nome)}<br>
+          <b>Estado Jurídico:</b> ${v(p.fase_ti)}<br>
+          <b>Município:</b> ${v(p.municipio_)}<br>
+          <b>Estado:</b> ${v(p.uf_sigla)}
+        `);
+      }
+    });
+
+    const TI_Recente_Contato_Isolados_Amazonas_Layer = L.geoJSON(TI_Recente_Contato_Isolados, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#A87000",
+          weight: 1,
+          fillColor: "#A87000",
+          fillOpacity: 0.4
+        };
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        const p = feature.properties || {};
+
+        layer.bindPopup(`
+          <div style="text-align:center; font-size:14px; font-weight:bold; color:#000; margin-bottom:10px;">
+            Terra Indígena ${v(p.terrai_nom)}
+          </div>
+
+          <b>Terras Indígenas com Povos Indígenas de Recente Contato e Isolados</b><br><br>
+          <b>Etnias:</b> ${v(p.etnia_nome)}<br>
+          <b>Estado Jurídico:</b> ${v(p.fase_ti)}<br>
+          <b>Município:</b> ${v(p.municipio_)}<br>
+          <b>Estado:</b> ${v(p.uf_sigla)}
+        `);
+      }
+    });
+
+    const TI_Restricao_de_uso_Layer = L.geoJSON(Restricao_de_uso, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#DF73FF",
+          weight: 1,
+          fillColor: "#DF73FF",
+          fillOpacity: 0.4
+        };
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        const p = feature.properties || {};
+
+        layer.bindPopup(`
+          <div style="text-align:center; font-size:14px; font-weight:bold; color:#000; margin-bottom:10px;">
+            Terra Indígena ${v(p.terrai_nom)}<br>
+          </div>
+
+          <b>TI com Restrição de Uso para proteção de Povos Indígenas Isolados</b><br><br>
+          <b>Etnias:</b> ${v(p.etnia_nome)}<br>
+          <b>Estado Jurídico:</b> ${v(p.fase_ti)}<br>
+          <b>Município:</b> ${v(p.municipio_)}<br>
+          <b>Estado:</b> ${v(p.uf_sigla)}
+        `);
+      }
+    });
+
+    const Outras_TI_Amazonas_Layer = L.geoJSON(Outras_TI_Amazonas, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#8B904B",
+          weight: 1,
+          fillColor: "#8B904B",
+          fillOpacity: 0.2
+        };
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        const p = feature.properties || {};
+
+        layer.bindPopup(`
+          <div style="text-align:center; font-size:14px; font-weight:bold; color:#000; margin-bottom:10px;">
+            Terra Indígena ${v(p.terrai_nom)}<br>
+          </div>
+
+          <b>Outras Terras Indígenas no Amazonas</b><br><br>
+          <b>Etnias:</b> ${v(p.etnia_nome)}<br>
+          <b>Estado Jurídico:</b> ${v(p.fase_ti)}<br>
+          <b>Município:</b> ${v(p.municipio_)}<br>
+          <b>Estado:</b> ${v(p.uf_sigla)}
+        `);
+      }
+    });
+
+    const Piaci_confirmado_Layer = L.geoJSON(Piaci_confirmado, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#E1E1E1",
+          weight: 1,
+          fillColor: "#E1E1E1",
+          fillOpacity: 0.2
+        };
+      },
+      interactive: false
+    });
+
+    const Piaci_noconfirmado_Layer = L.geoJSON(Piaci_noconfirmado, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#66CDAB",
+          weight: 1,
+          fillColor: "#66CDAB",
+          fillOpacity: 0.2
+        };
+      },
+      interactive: false
+    });
+
+const Mineracao_Amazonas_Layer = L.geoJSON(Mineracao_Amazonas, {
+  pane: "paneamazonas",
+  style: function () {
+    return {
+      color: "#E60000",
+      weight: 1,
+      fillColor: "#E60000",
+      fillOpacity: 0
+    };
+  },
+  interactive: true,
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(`<b>Garimpo</b>`);
+  }
+});
+
+const Rutas_Narcotrafico_Garimpo_Layer = L.geoJSON(Rutas_Narcotrafico_Garimpo, {
+  pane: "paneamazonas",
+  style: function () {
+    return {
+      color: "#FFAA00",
+      weight: 1.5,
+      fillColor: "#FFAA00",
+      fillOpacity: 0
+    };
+  },
+  interactive: true,
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(`<b>Rotas Fluviais de Narcotráfico e Mineração Ilegal</b>`);
+  }
+});
+
+
+
+const Rutas_Narcotrafico_Layer = L.geoJSON(Rutas_Narcotrafico, {
+  pane: "paneamazonas",
+  style: function () {
+    return {
+      color: "#55FF00",
+      weight: 2,
+      opacity: 1
+    };
+  },
+  interactive: true,
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(`<b>Rotas Fluviais de Narcotráfico</b>`);
+  }
+});
+
+
+
+const Rutas_MineracaoIlegal_Layer = L.geoJSON(Rutas_Mineracao, {
+  pane: "paneamazonas",
+  style: function () {
+    return {
+      color: "#C500FF",
+      weight: 2,
+      opacity: 1
+    };
+  },
+  interactive: true,
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(`<b>Rotas Fluviais de Narcotráfico</b>`);
+  }
+});
+
+
+
+    const Desmatamento_2025_Layer = L.geoJSON(Desmatamento_2025, {
+      pane: "paneamazonas",
+      style: {
+        color: "#FFFFCC",
+        weight: 0.4,
+        fillColor: "#FFFFCC",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2025</b>`);
+      }
+    });
+
+    const Desmatamento_2024_Layer = L.geoJSON(Desmatamento_2024, {
+      pane: "paneamazonas",
+      style: {
+        color: "#FFF1A8",
+        weight: 0.4,
+        fillColor: "#FFF1A8",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2024</b>`);
+      }
+    });
+
+    const Desmatamento_2023_Layer = L.geoJSON(Desmatamento_2023, {
+      pane: "paneamazonas",
+      style: {
+        color: "#FEE087",
+        weight: 0.4,
+        fillColor: "#FEE087",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2023</b>`);
+      }
+    });
+
+    const Desmatamento_2022_Layer = L.geoJSON(Desmatamento_2022, {
+      pane: "paneamazonas",
+      style: {
+        color: "#FECC5C",
+        weight: 0.4,
+        fillColor: "#FECC5C",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2022</b>`);
+      }
+    });
+
+    const Desmatamento_2021_Layer = L.geoJSON(Desmatamento_2021, {
+      pane: "paneamazonas",
+      style: {
+        color: "#FDBB4B",
+        weight: 0.4,
+        fillColor: "#FDBB4B",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2021</b>`);
+      }
+    });
+
+    const Desmatamento_2020_Layer = L.geoJSON(Desmatamento_2020, {
+      pane: "paneamazonas",
+      style: {
+        color: "#FC9A3A",
+        weight: 0.4,
+        fillColor: "#FC9A3A",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2020</b>`);
+      }
+    });
+
+    const Desmatamento_2019_Layer = L.geoJSON(Desmatamento_2019, {
+      pane: "paneamazonas",
+      style: {
+        color: "#FC7C2A",
+        weight: 0.4,
+        fillColor: "#FC7C2A",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2019</b>`);
+      }
+    });
+
+    const Desmatamento_2018_Layer = L.geoJSON(Desmatamento_2018, {
+      pane: "paneamazonas",
+      style: {
+        color: "#F95D1D",
+        weight: 0.4,
+        fillColor: "#F95D1D",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2018</b>`);
+      }
+    });
+
+    const Desmatamento_2017_Layer = L.geoJSON(Desmatamento_2017, {
+      pane: "paneamazonas",
+      style: {
+        color: "#E5391C",
+        weight: 0.4,
+        fillColor: "#E5391C",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2017</b>`);
+      }
+    });
+
+    const Desmatamento_2016_Layer = L.geoJSON(Desmatamento_2016, {
+      pane: "paneamazonas",
+      style: {
+        color: "#B81419",
+        weight: 0.4,
+        fillColor: "#B81419",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2016</b>`);
+      }
+    });
+
+    const Desmatamento_2015_Layer = L.geoJSON(Desmatamento_2015, {
+      pane: "paneamazonas",
+      style: {
+        color: "#800026",
+        weight: 0.4,
+        fillColor: "#800026",
+        fillOpacity: 0
+      },
+      interactive: true,
+      onEachFeature: function (feature, layer) {
+        layer.bindPopup(`<b>Desmatamento 2015</b>`);
+      }
+    });
+
+    const Estados_Brasil_Layer = L.geoJSON(Estados_Brasil, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#000000",
+          weight: 0.7,
+          fillColor: "#E1E1E1",
+          fillOpacity: 0.1
+        };
+      },
+      interactive: false
+    }).addTo(map);
+
+
+        const Paises_Layer = L.geoJSON(Paisesgeo, {
+      pane: "paneamazonas",
+      style: function () {
+        return {
+          color: "#000000",
+          weight: 1.5,
+          fillColor: "#E1E1E1",
+          fillOpacity: 0.1
+        };
+      },
+      interactive: false
+    }).addTo(map);
+
+    // =======================
+    // CONTROLE DAS CAMADAS
+    // Todas começam desligadas
+    // =======================
+const controlesCamadas = [
+  ["chk-ancestral", TI_Recente_Contato_Amazonas_Layer],
+  ["chk-isoladoserecentes", TI_Recente_Contato_Isolados_Amazonas_Layer],
+  ["chk-restricao", TI_Restricao_de_uso_Layer],
+  ["chk-terrasbrasil", Outras_TI_Amazonas_Layer],
+  ["chk-piaci", Piaci_confirmado_Layer],
+  ["chk-piaci-nao-confirmada", Piaci_noconfirmado_Layer],
+
+  ["chk-garimpo", Mineracao_Amazonas_Layer],
+  ["chk-narcogarimpo", Rutas_Narcotrafico_Garimpo_Layer],
+  ["chk-narco", Rutas_Narcotrafico_Layer],
+  ["chk-mineracao", Rutas_MineracaoIlegal_Layer],
+
+  ["chk-desm2025", Desmatamento_2025_Layer],
+  ["chk-desm2024", Desmatamento_2024_Layer],
+  ["chk-desm2023", Desmatamento_2023_Layer],
+  ["chk-desm2022", Desmatamento_2022_Layer],
+  ["chk-desm2021", Desmatamento_2021_Layer],
+  ["chk-desm2020", Desmatamento_2020_Layer],
+  ["chk-desm2019", Desmatamento_2019_Layer],
+  ["chk-desm2018", Desmatamento_2018_Layer],
+  ["chk-desm2017", Desmatamento_2017_Layer],
+  ["chk-desm2016", Desmatamento_2016_Layer],
+  ["chk-desm2015", Desmatamento_2015_Layer]
+];
+
+controlesCamadas.forEach(([idCheckbox, camada]) => {
+  const checkbox = document.getElementById(idCheckbox);
+
+  checkbox.checked = false;
+
+  checkbox.addEventListener("change", function () {
+    if (this.checked) {
+      camada.addTo(map);
+    } else {
+      map.removeLayer(camada);
+    }
+  });
+});
+
+  
+  </script>
+</body>
+</html>

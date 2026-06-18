@@ -1,0 +1,1 @@
+var Ponto_Amazonas = {"type":"FeatureCollection","features":[{"type":"Feature","id":1,"geometry":{"type":"Point","coordinates":[-63.874554765390087,-2.4652686550243743]},"properties":{"OBJECTID":1,"Id":0,"Name":"Amazonas"}}]}

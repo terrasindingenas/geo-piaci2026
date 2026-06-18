@@ -1,0 +1,1 @@
+var Ponto_Brasil2 = {"type":"FeatureCollection","features":[{"type":"Feature","id":0,"geometry":{"type":"Point","coordinates":[-63.911626474266569,-4.6895712001129475]},"properties":{"FID":0,"Id":0,"Name":"Brasil"}}]}
